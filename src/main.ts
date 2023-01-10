@@ -224,9 +224,39 @@ async function run() {
         // caused by exec(`sh -c "${script}"`)
         await exec.exec('sh', ['-c', script]);
       }
+      // exec.exec(`echo $PATH`)
+      // exec.exec(`exit`)
+      // exec.exec(`echo $PATH`)
+      // exec.exec(`adb shell root`);
+      // exec.exec(`adb shell devices`);
+      // exec.exec(`adb shell pull $PWD/storage/emulated/0/Pictures/screenshots`);
     } catch (error) {
       core.setFailed(error instanceof Error ? error.message : (error as string));
     }
+
+    // custom pre emulator termination script
+    // const preEmulatorTerminationScriptInput = core.getInput('pre-emulator-termination-script');
+    // const preEmulatorTerminationScripts = !preEmulatorTerminationScriptInput ? undefined : parseScript(preEmulatorTerminationScriptInput);
+    // console.log(`Pre emulator termination script:`);
+    // preEmulatorTerminationScripts?.forEach(async (script: string) => {
+    //   console.log(`${script}`);
+    // });
+    // console.log(`::endgroup::`);
+
+    // // execute pre emulator termination script if set
+    // if (preEmulatorTerminationScripts !== undefined) {
+    //   console.log(`::group::Run pre emulator termination script`);
+    //   try {
+    //     for (const preEmulatorTerminationScript of preEmulatorTerminationScripts) {
+    //       await exec.exec('sh', ['-c', preEmulatorTerminationScript], {
+    //         cwd: workingDirectory,
+    //       });
+    //     }
+    //   } catch (error) {
+    //     core.setFailed(error instanceof Error ? error.message : (error as string));
+    //   }
+    //   console.log(`::endgroup::`);
+    // }
 
     // finally kill the emulator
     await killEmulator();
